@@ -1067,7 +1067,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 #### 视频讲解
 
-![视频讲解](/raw/reference/md-videos/rocketmq.mp4)
+![视频讲解](/reference/md-videos/rocketmq.mp4)
 
 
 
