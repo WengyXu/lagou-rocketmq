@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lagou.rocketmq.mapper.ProductStockMapper">
+
+    <select id="findAllStock" resultType="com.lagou.rocketmq.entity.ProductStock">
+        SELECT
+            product_id, amount
+        FROM
+            product_stock
+    </select>
+
+    <update id="modifyAmountById">
+        UPDATE product_stock SET amount=amount+#{step} WHERE product_id=#{productId} AND amount>0;
+    </update>
+
+</mapper>

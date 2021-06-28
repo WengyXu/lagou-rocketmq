@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>拉勾秒杀</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div align="center">
+    <img src="../img/buy.png" height="1120" width="1919" usemap="#buttonmap"/>
+    <map name="buttonmap" id="buttonmap">
+        <area id="buyButton" shape="rect" coords="885,400,958,434" href="javascript:buy('1')"/>
+    </map>
+</div>
+<script>
+
+    function buy(productId) {
+        var userId = 1;
+        $.ajax({
+            url: 'http://192.168.0.100:8080/buy/url',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                productId: productId
+            },
+            success: function (data) {
+                if (data.urlPath == '') {
+                    alert('活动尚未开始');
+                    return false;
+                }
+
+                $.ajax({
+                    url: 'http://192.168.0.102:8080/' + data.urlPath,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        userId: userId
+                    },
+                    success: function (result) {
+                        if (result) {
+                            alert('秒杀成功');
+                        } else {
+                            alert('秒杀失败');
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+</script>
+</body>
+</html>
